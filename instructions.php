@@ -17,3 +17,18 @@
 //invetigate how to run this without 
 //curl and then look for the element that indicates a successful question
 //look up things about curl. 
+
+//break it down
+
+/*
+curl a site
+search for a certain word
+if a certain word stop
+else keep going
+
+use a while loop to keep going
+
+first step
+read about curl
+make a sample text file with the words separated by a space
+figure out how to read through txt file with php
