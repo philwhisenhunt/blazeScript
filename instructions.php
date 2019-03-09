@@ -32,3 +32,11 @@ first step
 read about curl
 make a sample text file with the words separated by a space
 figure out how to read through txt file with php
+*/
+
+$fileHere = fopen("smallList.txt", "r") or die ("Cant open file!");
+while(!feof($fileHere)){
+    echo fgets($fileHere) ;
+}
+echo "\n";
+fclose($fileHere);
