@@ -43,8 +43,8 @@ function get_web_page( $url )
         CURLOPT_CUSTOMREQUEST  =>"GET",        //set request type post or get
         CURLOPT_POST           =>false,        //set to GET
         CURLOPT_USERAGENT      => $user_agent, //set user agent
-        CURLOPT_COOKIEFILE     =>"cookie.txt", //set cookie file
-        CURLOPT_COOKIEJAR      =>"cookie.txt", //set cookie jar
+        //CURLOPT_COOKIEFILE     =>"cookie.txt", //set cookie file
+        //CURLOPT_COOKIEJAR      =>"cookie.txt", //set cookie jar
         CURLOPT_RETURNTRANSFER => true,     // return web page
         CURLOPT_HEADER         => false,    // don't return headers
         CURLOPT_FOLLOWLOCATION => true,     // follow redirects
@@ -55,8 +55,15 @@ function get_web_page( $url )
         CURLOPT_MAXREDIRS      => 10,       // stop after 10 redirects
     );
 
+    //initializes curl
     $ch      = curl_init( $url );
     curl_setopt_array( $ch, $options );
+    
+    //Addition
+    $addition = " | sed 's/<\/*[^>]*>//g'";
+
+
+    //Performs the curl session
     $content = curl_exec( $ch );
     $err     = curl_errno( $ch );
     $errmsg  = curl_error( $ch );
