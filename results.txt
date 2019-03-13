@@ -1,3 +1,15 @@
+HTTP/1.1 200 OK
+Date: Wed, 13 Mar 2019 15:34:24 GMT
+Server: Apache/2.2.34 (Unix) mod_wsgi/3.5 Python/2.7.13 PHP/7.2.8 mod_ssl/2.2.34 OpenSSL/1.0.2o DAV/2 mod_fastcgi/mod_fastcgi-SNAP-0910052141 mod_perl/2.0.9 Perl/v5.24.0
+X-Powered-By: PHP/7.2.8
+Expires: Wed, 11 Jan 1984 05:00:00 GMT
+Cache-Control: no-cache, must-revalidate, max-age=0
+Set-Cookie: wordpress_test_cookie=WP+Cookie+check; path=/
+X-Frame-Options: SAMEORIGIN
+Content-Length: 3252
+Connection: close
+Content-Type: text/html; charset=UTF-8
+
 <!DOCTYPE html>
 	<!--[if IE 8]>
 		<html xmlns="http://www.w3.org/1999/xhtml" class="ie8" lang="en-US">
