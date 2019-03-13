@@ -91,3 +91,15 @@ echo "\n";
 
 
 //if [content] has the word "google" then print "HERE"
+//using strpos because we want it to return false
+$needle = "beer";
+$checker = strpos($resultFromCurl['content'], $needle);
+echo "Checker is " . $checker;
+
+if($checker != false){
+    echo "Checker is not false";
+}
+else{
+    echo "checker is false.";
+}
+echo "\n";
