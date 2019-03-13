@@ -76,13 +76,8 @@ function get_web_page( $url )
     return $header;
 }
 
-$fileHere = fopen("smallList.txt", "r") or die ("Cant open file!");
-while(!feof($fileHere)){
-    echo fgets($fileHere) ;
-}
-echo "\n";
-fclose($fileHere);
-$url = 'https://www.google.com/';
+
+$url = 'http://localhost:8888/wp-login.php';
 $resultFromCurl = get_web_page( $url );
 print_r($resultFromCurl);
 echo "And now the piece of the result: " . $resultFromCurl['errno'];
@@ -103,3 +98,12 @@ else{
     echo "checker is false.";
 }
 echo "\n";
+
+file_put_contents('results.txt', $resultFromCurl['content']);
+
+$fileHere = fopen("smallList.txt", "r") or die ("Cant open file!");
+while(!feof($fileHere)){
+    echo fgets($fileHere) ;
+}
+echo "\n";
+fclose($fileHere);
