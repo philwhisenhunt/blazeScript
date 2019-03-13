@@ -1,10 +1,12 @@
 <?php
 
+$username = "admin";
+$password = "password01";
+
 function get_web_page( $url )
 {
     $user_agent='Mozilla/5.0 (Windows NT 6.1; rv:8.0) Gecko/20100101 Firefox/8.0';
-    $username = "admin";
-    $password = "password";
+    
 
     $options = array(
 
@@ -30,17 +32,6 @@ function get_web_page( $url )
     //save this one
     curl_setopt_array( $ch, $options );
     
-    //but try this one
-    /*
-    $username = "admin";
-    $password = "password01";
-    curl_setopt($ch, CURLOPT_USERPWD, $username . ":" . $password);
-    */
-
-    //Addition
-    // $addition = " | sed 's/<\/*[^>]*>//g'";
-
-
     //Performs the curl session
     $content = curl_exec( $ch );
     $err     = curl_errno( $ch );
@@ -57,23 +48,24 @@ function get_web_page( $url )
 
 $url = 'http://localhost:8888/wp-login.php';
 $resultFromCurl = get_web_page( $url );
-print_r($resultFromCurl);
+//print_r($resultFromCurl);
 
 
 echo "\n";
 
 
-//if [content] has the word "google" then print "HERE"
+//if [content] has the word in $needle, then print "HERE"
 //using strpos because we want it to return false
-$needle = "beer";
+$needle = "Lost";
 $checker = strpos($resultFromCurl['header'], $needle);
-echo "Checker is " . $checker;
+echo "Checker is " . $checker . " ". "\n";
 
-if($checker != false){
-    echo "Checker is not false";
+if($checker !== false){
+    echo "Checker is not false \n";
+  
 }
 else{
-    echo "checker is false.";
+    echo "The needle is not in the haystack";
 }
 echo "\n";
 
@@ -81,7 +73,13 @@ file_put_contents('results.txt', $resultFromCurl['content']);
 
 $fileHere = fopen("smallList.txt", "r") or die ("Cant open file!");
 while(!feof($fileHere)){
-    echo fgets($fileHere) ;
+    $password = fgets($fileHere);
+    //echo "The current password we are trying is ... " . fgets($fileHere);
+    echo "The current password we are trying is ... " . $password;
+    echo "\n";
+
+
+    
 }
 echo "\n";
 fclose($fileHere);
