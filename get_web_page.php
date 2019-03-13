@@ -7,7 +7,7 @@ function get_web_page( $url, $username, $password )
     $options = array(
 
         CURLOPT_CUSTOMREQUEST  =>"POST",        //set request type post or get
-        CURLOPT_POST           =>true,        //set to GET
+        CURLOPT_POST           =>true,        //set to POST
         CURLOPT_USERAGENT      => $user_agent, //set user agent
         CURLOPT_COOKIEFILE     =>"cookie.txt", //set cookie file
         CURLOPT_COOKIEJAR      =>"cookie.txt", //set cookie jar
@@ -19,7 +19,8 @@ function get_web_page( $url, $username, $password )
         CURLOPT_CONNECTTIMEOUT => 120,      // timeout on connect
         CURLOPT_TIMEOUT        => 120,      // timeout on response
         CURLOPT_MAXREDIRS      => 10,       // stop after 10 redirects
-        CURLOPT_USERPWD        => $username . ":" . $password
+        //CURLOPT_USERPWD        => $username . ":" . $password
+        CURLOPT_POSTFIELDS     => array("log"=>$username, "pwd"=>$password)
     );
 
     //initializes curl

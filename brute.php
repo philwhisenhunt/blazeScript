@@ -35,6 +35,7 @@ while(!feof($fileHere)){
 
     */
     $needle = "Welcome to WordPress";
+    $needle = "This is your first post.";
     $checker = strpos($resultFromCurl['content'], $needle);
     //$checker = true;
 
