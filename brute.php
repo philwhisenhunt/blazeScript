@@ -1,7 +1,7 @@
 <?php
 
 $username = "admin";
-$password = "password01";
+$password = "password";
 
 function get_web_page( $url )
 {
@@ -70,6 +70,9 @@ else{
 echo "\n";
 
 file_put_contents('results.txt', $resultFromCurl['content']);
+
+echo "----------------------------------";
+print_r($resultFromCurl);
 
 $fileHere = fopen("smallList.txt", "r") or die ("Cant open file!");
 while(!feof($fileHere)){
