@@ -9,8 +9,8 @@ function get_web_page( $url, $username, $password )
         CURLOPT_CUSTOMREQUEST  =>"POST",        //set request type post or get
         CURLOPT_POST           =>true,        //set to GET
         CURLOPT_USERAGENT      => $user_agent, //set user agent
-        //CURLOPT_COOKIEFILE     =>"cookie.txt", //set cookie file
-        //CURLOPT_COOKIEJAR      =>"cookie.txt", //set cookie jar
+        CURLOPT_COOKIEFILE     =>"cookie.txt", //set cookie file
+        CURLOPT_COOKIEJAR      =>"cookie.txt", //set cookie jar
         CURLOPT_RETURNTRANSFER => true,     // return web page
         CURLOPT_HEADER         => false,    // don't return headers
         CURLOPT_FOLLOWLOCATION => true,     // follow redirects
