@@ -22,9 +22,16 @@ function get_web_page( $url )
     );
 
     //initializes curl
-    $ch      = curl_init( $url );
-    curl_setopt_array( $ch, $options );
+    $ch = curl_init( $url );
+
+    //save this one
+    //curl_setopt_array( $ch, $options );
     
+    //but try this one
+    $username = "admin";
+    $password = "password01";
+    curl_setopt($ch, CURLOPT_USERPWD, $username . ":" . $password);
+
     //Addition
     // $addition = " | sed 's/<\/*[^>]*>//g'";
 
@@ -46,7 +53,7 @@ function get_web_page( $url )
 $url = 'http://localhost:8888/wp-login.php';
 $resultFromCurl = get_web_page( $url );
 print_r($resultFromCurl);
-echo "And now the piece of the result: " . $resultFromCurl['errno'];
+
 
 echo "\n";
 
@@ -54,7 +61,7 @@ echo "\n";
 //if [content] has the word "google" then print "HERE"
 //using strpos because we want it to return false
 $needle = "beer";
-$checker = strpos($resultFromCurl['content'], $needle);
+$checker = strpos($resultFromCurl['header'], $needle);
 echo "Checker is " . $checker;
 
 if($checker != false){
