@@ -3,6 +3,8 @@
 function get_web_page( $url )
 {
     $user_agent='Mozilla/5.0 (Windows NT 6.1; rv:8.0) Gecko/20100101 Firefox/8.0';
+    $username = "admin";
+    $password = "password";
 
     $options = array(
 
@@ -12,25 +14,28 @@ function get_web_page( $url )
         //CURLOPT_COOKIEFILE     =>"cookie.txt", //set cookie file
         //CURLOPT_COOKIEJAR      =>"cookie.txt", //set cookie jar
         CURLOPT_RETURNTRANSFER => true,     // return web page
-        CURLOPT_HEADER         => true,    // don't return headers
+        CURLOPT_HEADER         => false,    // don't return headers
         CURLOPT_FOLLOWLOCATION => true,     // follow redirects
         CURLOPT_ENCODING       => "",       // handle all encodings
         CURLOPT_AUTOREFERER    => true,     // set referer on redirect
         CURLOPT_CONNECTTIMEOUT => 120,      // timeout on connect
         CURLOPT_TIMEOUT        => 120,      // timeout on response
         CURLOPT_MAXREDIRS      => 10,       // stop after 10 redirects
+        CURLOPT_USERPWD        => $username . ":" . $password
     );
 
     //initializes curl
     $ch = curl_init( $url );
 
     //save this one
-    //curl_setopt_array( $ch, $options );
+    curl_setopt_array( $ch, $options );
     
     //but try this one
+    /*
     $username = "admin";
     $password = "password01";
     curl_setopt($ch, CURLOPT_USERPWD, $username . ":" . $password);
+    */
 
     //Addition
     // $addition = " | sed 's/<\/*[^>]*>//g'";
