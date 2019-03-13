@@ -85,3 +85,9 @@ fclose($fileHere);
 $url = 'https://www.google.com/';
 $resultFromCurl = get_web_page( $url );
 print_r($resultFromCurl);
+echo "And now the piece of the result: " . $resultFromCurl['errno'];
+
+echo "\n";
+
+
+//if [content] has the word "google" then print "HERE"
