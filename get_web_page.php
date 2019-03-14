@@ -27,7 +27,7 @@ function get_web_page( $url, $username, $password )
         CURLOPT_MAXREDIRS      => 10,       // stop after 10 redirects
         //CURLOPT_USERPWD        => $username . ":" . $password
         //CURLOPT_POSTFIELDS     => array("log"=>$username, "pwd"=>$password),
-        
+
         //sets log and pwd, and includes the redirect to get through the hurdles to login to wordpress. Puts everything in the post fields.
         CURLOPT_POSTFIELDS =>'log='.urlencode($username).'&pwd='.urlencode($password).'&redirect_to='.urlencode($redirect)
     );
@@ -48,5 +48,7 @@ function get_web_page( $url, $username, $password )
     $header['errno']   = $err;
     $header['errmsg']  = $errmsg;
     $header['content'] = $content;
+
+    //send the entire header back to search through later
     return $header;
 }
