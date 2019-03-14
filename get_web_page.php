@@ -1,7 +1,11 @@
 <?php
+
 function get_web_page( $url, $username, $password )
 {
+    //Set the browser
     $user_agent='Mozilla/5.0 (Windows NT 6.1; rv:8.0) Gecko/20100101 Firefox/8.0';
+
+    //Once logged in, WP will redirect to this url
     $redirect = 'http://localhost:8888/wp-admin/';
 
     
@@ -23,7 +27,8 @@ function get_web_page( $url, $username, $password )
         CURLOPT_MAXREDIRS      => 10,       // stop after 10 redirects
         //CURLOPT_USERPWD        => $username . ":" . $password
         //CURLOPT_POSTFIELDS     => array("log"=>$username, "pwd"=>$password),
-        //added from 
+        
+        //sets log and pwd, and includes the redirect to get through the hurdles to login to wordpress. Puts everything in the post fields.
         CURLOPT_POSTFIELDS =>'log='.urlencode($username).'&pwd='.urlencode($password).'&redirect_to='.urlencode($redirect)
     );
 
