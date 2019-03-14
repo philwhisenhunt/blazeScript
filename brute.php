@@ -37,7 +37,7 @@ while(!feof($fileHere)){
     if($checker){
         file_put_contents("passwordsThatWorked.txt", $password, FILE_APPEND);
         echo "It worked!! The password is $password \n";
-        echo "Exciting \n";
+        echo "Exiting.. \n";
         exit();
     }
     
