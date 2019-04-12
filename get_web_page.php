@@ -34,47 +34,15 @@ function get_web_page( $url, $username, $password )
 
     //initializes curl
     $ch = curl_init( $url );
-   
-
-    
-
-    /*
-    $ch2 = curl_init( $url );
-
-    $mh = curl_multi_init();
-    curl_multi_add_handle($mh, $ch);
-    curl_multi_add_handle($mh, $ch2);
-
-    //now we need to execute the multi handle
-
-    do {
-        $content = curl_multi_exec($mh, $active);
-        if ($active) {
-            curl_multi_select($mh);
-            $header['content'] = $content;
-            return $header;
-        }
-    } while ($active && $status == CURLM_OK);
-
-    curl_multi_remove_handle($mh, $ch);
-    curl_multi_remove_handle($mh, $ch2);
-    curl_multi_close($mh);
-
-*/
-
-
 
     //save this one
     curl_setopt_array( $ch, $options );
     
-    
     //Performs the curl session
     $content = curl_exec( $ch );
-   
     $err     = curl_errno( $ch );
     $errmsg  = curl_error( $ch );
     $header  = curl_getinfo( $ch );
-    
     curl_close( $ch );
 
     $header['errno']   = $err;
@@ -82,8 +50,5 @@ function get_web_page( $url, $username, $password )
     $header['content'] = $content;
 
     //send the entire header back to search through later
-   
     return $header;
-    
-    
 }
