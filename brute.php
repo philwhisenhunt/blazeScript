@@ -24,6 +24,7 @@ while(!feof($fileHere)){
     echo "\n";
 
     $resultFromCurl = get_web_page( $url, $username, $password);
+    //print_r($resultFromCurl);
 
     //If we see this, we know that we are logged in
     $needle = "Welcome to your WordPress Dashboard!";
