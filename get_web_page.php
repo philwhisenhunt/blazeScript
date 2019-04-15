@@ -6,14 +6,16 @@ function get_web_page( $url, $username, $password )
     $user_agent='Mozilla/5.0 (Windows NT 6.1; rv:8.0) Gecko/20100101 Firefox/8.0';
 
     //Once logged in, WP will redirect to this url
-    $redirect = 'http://localhost:8888/wp-admin/';
+    // $redirect = 'http://127.0.0.1:8888/wp-admin/';
+    $redirect = './wp-admin/';
+
 
     
 
     $options = array(
 
         CURLOPT_CUSTOMREQUEST  =>"POST",        //set request type post or get
-        CURLOPT_POST           =>true,        //set to POST
+        CURLOPT_POST           => true,        //set to POST
         CURLOPT_USERAGENT      => $user_agent, //set user agent
         CURLOPT_COOKIEFILE     =>"cookie.txt", //set cookie file
         CURLOPT_COOKIEJAR      =>"cookie.txt", //set cookie jar
@@ -33,6 +35,7 @@ function get_web_page( $url, $username, $password )
     );
 
     //initializes curl
+    //echo "The url is " . $url;
     $ch = curl_init( $url );
 
     //save this one
@@ -50,5 +53,20 @@ function get_web_page( $url, $username, $password )
     $header['content'] = $content;
 
     //send the entire header back to search through later
+
+    if($err){
+        echo "cURL Error #:" . $err;
+        echo $errmsg;
+    }
+
+    if ( $header['errno'] != 0 ){
+        echo "first";
+
+    }
+
+    if ( $header['http_code'] != 200 ){
+    echo 'second';
+    }
+
     return $header;
 }

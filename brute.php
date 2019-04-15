@@ -4,7 +4,8 @@ require 'get_web_page.php';
 $username = "admin";
 $password = "passwordholder";
 
-$url = 'http://localhost:8888/wp-login.php';
+//$url = 'http://localhost:8888/wp-login.php';
+$url = 'http://127.0.0.1:8888/wp-login.php';
 
 echo "\n";
 
@@ -24,7 +25,7 @@ while(!feof($fileHere)){
     echo "\n";
 
     $resultFromCurl = get_web_page( $url, $username, $password);
-    //print_r($resultFromCurl);
+    // print_r($resultFromCurl);
 
     //If we see this, we know that we are logged in
     $needle = "Welcome to your WordPress Dashboard!";
