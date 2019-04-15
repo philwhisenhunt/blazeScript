@@ -6,14 +6,13 @@ function queueUp($array_of_passwords) {
 
     $user_agent='Mozilla/5.0 (Windows NT 6.1; rv:8.0) Gecko/20100101 Firefox/8.0';
 
-
     // Pick a url
     $url = 'http://127.0.0.1:8888/wp-login.php';
     $username = 'admin';
     $redirect = './wp-admin/';
 
     foreach($array_of_passwords as $password){
-        echo "The password is $password";
+        echo "The password is $password \n";
         $ch1 = curl_init($url);
         $options = array(
 
@@ -37,12 +36,23 @@ function queueUp($array_of_passwords) {
             CURLOPT_POSTFIELDS =>'log='.urlencode($username).'&pwd='.urlencode($password).'&redirect_to='.urlencode($redirect)
         );
         
+        //add the options
+        curl_setopt_array( $ch1, $options );
+
         //now add it to the group
         curl_multi_add_handle($mh, $ch1);
 
 
     }
+    echo "the var dump is \n";
+    var_dump($mh);
+    $answer = curl_multi_info_read($mh);
+    var_dump($answer);
 
+    $content = curl_exec( $ch );
+    die();
+    
+/*
     do{
         //multi_exec is the part that is returning something 
         $content = curl_multi_exec($mh, $active);
@@ -54,7 +64,7 @@ function queueUp($array_of_passwords) {
     curl_multi_remove_handle($mh, $ch1);
     // curl_multi_remove_handle($mh, $ch2);
     curl_multi_close($mh);
-
+*/
 }
 
 
