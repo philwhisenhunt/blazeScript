@@ -7,4 +7,4 @@
 ```php
 php brute.php
 ```
-4. Once the correct password is used, the password will be stored in passwordsThatWorked.txt.
+4. Once the correct password is used, the password will be stored in passwordsThatWorked.txt.# blazeScript
