@@ -38,6 +38,10 @@ function get_web_page( $url, $username, $password )
     //echo "The url is " . $url;
     $ch = curl_init( $url );
 
+    //for each password option, set the options for it
+    //run the entire set of 10 passwords, then return what you get
+    //scan through it and see if the string is in there.
+
     //save this one
     curl_setopt_array( $ch, $options );
     
