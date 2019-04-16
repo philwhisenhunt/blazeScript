@@ -40,8 +40,8 @@ function queueUp($array_of_passwords) {
             CURLOPT_URL => $url
         );
 
-          echo '$i is ' . $i;
-          echo "\n";
+          // echo '$i is ' . $i;
+          // echo "\n";
           echo '$password is ' . $password;
           echo "\n";
           $multiCurl[$i] = curl_init();

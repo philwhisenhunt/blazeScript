@@ -58,7 +58,6 @@ buster
 1234567
 soccer
 hockey
-password01
 killer
 george
 sexy
@@ -517,3 +516,4 @@ phantom
 billy
 6666
 albert
+password01
