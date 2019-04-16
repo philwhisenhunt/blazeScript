@@ -58,9 +58,10 @@ function queueUp($array_of_passwords) {
 
       //get content and then remove the handles
       foreach($multiCurl as $k => $ch){
+
           $result[$k] = curl_multi_getcontent($ch);
           //echo "The result is " . $result[$k];
-        print_r($result);
+        //print_r($result);
           curl_multi_remove_handle($mh, $ch);
       }
 
