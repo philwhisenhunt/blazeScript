@@ -1,6 +1,7 @@
 <?php
 require 'queueUp.php';
 
+$time_start = microtime(true);
 // $array_of_passwords = ['one', 'two', 'three', 'four', 'five', 'password01'];
 
 $fileHere = fopen("smallList.txt", "r") or die ("Cant open file!");
@@ -12,7 +13,7 @@ while(!feof($fileHere)){
 fclose($fileHere);
 
 //add the chunks here:
-$chunksOfPasswords = array_chunk($array_of_passwords, 200);
+$chunksOfPasswords = array_chunk($array_of_passwords, 956);
 
 foreach($chunksOfPasswords as $i =>$chunkPiece){
     //move code in here
@@ -40,9 +41,14 @@ foreach($chunksOfPasswords as $i =>$chunkPiece){
             file_put_contents("passwordsThatWorked.txt", $workingPassword, FILE_APPEND);
             echo "It worked!! The password is $workingPassword \n";
             echo "Exiting.. \n";
+            $time_end = microtime(true);
+            $execution_time = ($time_end - $time_start)/60;
+            echo 'Total Execution Time: ' . $execution_time . ' minutes'. "\n";
             exit();
 
         }
         
     }
 }
+
+
